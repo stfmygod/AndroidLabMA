@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidLabMA</string>
+    <string name="login_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">Register</string>
+    <string name="name_text">Name</string>
+</resources>
