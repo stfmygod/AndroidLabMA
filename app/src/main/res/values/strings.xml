@@ -5,4 +5,11 @@
     <string name="login_text">Login</string>
     <string name="register_text">Register</string>
     <string name="name_text">Name</string>
+    <string name="hello_user">Hello user!</string>
+    <string name="go_back">Go back</string>
+    <string name="add_movie">Add Movie</string>
+    <string name="name_string"><b>Name:</b> %1$s</string>
+    <string name="date_string"><b>Date:</b> %1$s</string>
+    <string name="rate_string"><b>Rate:</b> %1$s/5</string>
+
 </resources>

@@ -15,5 +15,12 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_objectListFragment"
+            app:destination="@id/objectListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/objectListFragment"
+        android:name="com.faculta.androidlabma.ui.ObjectListFragment"
+        android:label="ObjectListFragment" />
 </navigation>

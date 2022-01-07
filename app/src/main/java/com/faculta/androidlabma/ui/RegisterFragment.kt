@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.faculta.androidlabma.databinding.FragmentRegisterBinding
 import com.faculta.androidlabma.helpers.showToast
+import com.faculta.androidlabma.ui.viewmodel.RegisterViewModel
 
 class RegisterFragment: Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
+    private val viewModel = RegisterViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +25,17 @@ class RegisterFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.registerButton.setOnClickListener {
-            requireContext().showToast("Registered!")
+            val name = binding.nameTIET.text.toString()
+            val username = binding.usernameInputTIET.text.toString()
+            val password = binding.passwordInputTIET.text.toString()
+            viewModel.register(name, username, password)
+        }
+
+        viewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
+            requireContext().showToast(it)
+        }
+
+        viewModel.canNavigateToNextDestination.observe(viewLifecycleOwner) {
             requireActivity().onBackPressed()
         }
     }
