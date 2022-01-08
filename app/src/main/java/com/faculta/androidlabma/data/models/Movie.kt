@@ -4,7 +4,7 @@ import java.io.Serializable
 import java.util.*
 
 data class Movie(
-    val id: String? = null,
+    val _id: String? = null,
     val name: String? = null,
     val date: Date? = null,
     val rating: Int? = null,

@@ -22,5 +22,34 @@
     <fragment
         android:id="@+id/objectListFragment"
         android:name="com.faculta.androidlabma.ui.ObjectListFragment"
-        android:label="ObjectListFragment" />
+        android:label="ObjectListFragment" >
+        <action
+            android:id="@+id/action_objectListFragment_to_createUpdateObjectFragment"
+            app:destination="@id/createUpdateObjectFragment"
+            app:launchSingleTop="false">
+            <argument
+                android:name="isCreate"
+                android:defaultValue="true"
+                app:argType="boolean" />
+            <argument
+                android:name="objectValue"
+                android:defaultValue="@null"
+                app:argType="com.faculta.androidlabma.data.models.Movie"
+                app:nullable="true" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/createUpdateObjectFragment"
+        android:name="com.faculta.androidlabma.ui.CreateUpdateObjectFragment"
+        android:label="CreateUpdateObjectFragment">
+        <argument
+            android:name="isCreate"
+            android:defaultValue="true"
+            app:argType="boolean" />
+        <argument
+            android:name="objectValue"
+            android:defaultValue="@null"
+            app:argType="com.faculta.androidlabma.data.models.Movie"
+            app:nullable="true" />
+    </fragment>
 </navigation>

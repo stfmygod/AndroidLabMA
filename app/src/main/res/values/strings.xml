@@ -11,5 +11,16 @@
     <string name="name_string"><b>Name:</b> %1$s</string>
     <string name="date_string"><b>Date:</b> %1$s</string>
     <string name="rate_string"><b>Rate:</b> %1$s/5</string>
+    <string name="name_hint">Name</string>
+    <string name="name_subtitle">Name:</string>
+    <string name="create_title">Create a movie:</string>
+    <string name="update_title">Update a movie:</string>
+    <string name="rating_subtitle">Rating:</string>
+    <string name="rating_hint">Rating</string>
+    <string name="save">Save</string>
+    <string name="photo_path_subtitle">Photo:</string>
+    <string name="seen_at_cinema">Seen at cinema?</string>
+    <string name="delete">Delete</string>
+    <string name="photo_path">Photo path</string>
 
 </resources>

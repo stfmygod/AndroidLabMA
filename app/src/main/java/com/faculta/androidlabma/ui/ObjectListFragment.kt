@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faculta.androidlabma.databinding.FragmentObjectListBinding
 import com.faculta.androidlabma.helpers.showToast
@@ -25,21 +26,24 @@ class ObjectListFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.goBackButton.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+
 
         binding.addMovieButton.setOnClickListener {
-            // TODO open create screen
+            val directions = ObjectListFragmentDirections.actionObjectListFragmentToCreateUpdateObjectFragment()
+            findNavController().navigate(directions)
+        }
+
+        binding.goBackButton.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         viewModel.getMovies((requireActivity() as MainActivity).getToken()?: "")
 
         viewModel.moviesListLiveData.observe(viewLifecycleOwner) {
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            binding.recyclerView.adapter = ObjectListAdapter(requireContext(), it) {
-                // TODO open update screen for item
-                requireContext().showToast("Opening movie...")
+            binding.recyclerView.adapter = ObjectListAdapter(requireContext(), it) { movie ->
+                val directions = ObjectListFragmentDirections.actionObjectListFragmentToCreateUpdateObjectFragment(false, movie)
+                findNavController().navigate(directions)
             }
         }
 

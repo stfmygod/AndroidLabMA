@@ -5,13 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.faculta.androidlabma.R
-import com.faculta.androidlabma.data.network.ApiService
 import com.faculta.androidlabma.databinding.FragmentLoginBinding
-import com.faculta.androidlabma.databinding.FragmentRegisterBinding
 import com.faculta.androidlabma.helpers.showToast
 import com.faculta.androidlabma.ui.viewmodel.LoginViewModel
 
@@ -45,8 +42,11 @@ class LoginFragment : Fragment() {
 
         viewModel.canNavigateToNextDestination.observe(viewLifecycleOwner, {
             if (it) {
-                findNavController().navigate(R.id.action_loginFragment_to_objectListFragment)
                 Log.d("LoginFragment", (requireActivity() as MainActivity).getToken() ?: "")
+
+                val direction = LoginFragmentDirections.actionLoginFragmentToObjectListFragment()
+                findNavController().navigate(direction)
+                viewModel.canNavigateToNextDestination.value = false
             }
         })
 

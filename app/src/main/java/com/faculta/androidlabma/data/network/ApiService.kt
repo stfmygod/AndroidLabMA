@@ -8,15 +8,12 @@ import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
     companion object {
-        var BASE_URL = "http://192.168.151.5:3000/"
+        var BASE_URL = "http://192.168.73.5:3000/"
 
         fun create() : ApiService {
 
@@ -36,6 +33,25 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<List<Movie>>
 
+    @POST("api/item")
+    fun addMovie(
+        @Header("Authorization") token: String,
+        @Body movie: Movie
+    ): Call<Unit>
+
+    @PUT("api/item/{id}")
+    fun updateMovie(
+        @Header("Authorization") token: String,
+        @Body movie: Movie,
+        @Path("id") id: String
+    ): Call<Unit>
+
+    @DELETE("api/item/{id}")
+    fun deleteMovie(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): Call<Unit>
+
     @POST("api/auth/login")
     fun login(
         @Body loginRequest: LoginRequest
@@ -45,4 +61,8 @@ interface ApiService {
     fun register(
         @Body registerRequest: RegisterRequest
     ): Call<Unit>
+
+
+
+
 }
