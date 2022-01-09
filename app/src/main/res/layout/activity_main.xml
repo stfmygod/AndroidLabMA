@@ -14,4 +14,20 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>
 
+    <TextView
+        android:id="@+id/no_internet_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_red_light"
+        android:text="@string/no_internet_message"
+        android:textAlignment="center"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:scrollHorizontally="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textColor="@color/black"
+        android:freezesText="true"/>
 </RelativeLayout>

@@ -1,5 +1,10 @@
 package com.faculta.androidlabma.ui
 
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +17,10 @@ import com.faculta.androidlabma.databinding.FragmentLoginBinding
 import com.faculta.androidlabma.helpers.showToast
 import com.faculta.androidlabma.ui.viewmodel.LoginViewModel
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), SensorEventListener {
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var sensorManager: SensorManager
+    private var sensor: Sensor? = null
 
     private val viewModel = LoginViewModel()
     override fun onCreateView(
@@ -22,10 +29,14 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+
         binding.loginButton.setOnClickListener {
             val userName = binding.usernameInputTIET.text.toString()
             val password = binding.passwordInputTIET.text.toString()
@@ -51,5 +62,26 @@ class LoginFragment : Fragment() {
         })
 
 
+    }
+
+    override fun onSensorChanged(event: SensorEvent) {
+        val lux = event.values[0]
+        binding.sensorTextView.text = "Light sensor: $lux"
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+        Log.d("LoginFragment", "onAccuracyChanged $p1");
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sensor?.also {
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
     }
 }

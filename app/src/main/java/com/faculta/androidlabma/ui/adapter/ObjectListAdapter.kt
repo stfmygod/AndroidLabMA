@@ -4,13 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.faculta.androidlabma.data.db.model.MovieDB
 import com.faculta.androidlabma.data.models.Movie
 import com.faculta.androidlabma.databinding.ViewHolderMovieBinding
 
 class ObjectListAdapter(
     private val context: Context,
-    private var movies: List<Movie>,
-    private var onClick: (Movie) -> Unit
+    private var movies: List<MovieDB>,
+    private var onClick: (MovieDB) -> Unit
 ): RecyclerView.Adapter<ObjectListViewHolder>() {
     override fun getItemCount(): Int {
         return movies.size

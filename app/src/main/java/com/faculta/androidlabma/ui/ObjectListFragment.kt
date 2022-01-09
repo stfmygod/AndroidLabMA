@@ -33,6 +33,8 @@ class ObjectListFragment: Fragment() {
             findNavController().navigate(directions)
         }
 
+        viewModel.setDb((requireActivity() as MainActivity).getDb())
+
         binding.goBackButton.setOnClickListener {
             findNavController().popBackStack()
         }

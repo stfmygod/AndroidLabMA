@@ -13,7 +13,7 @@ import retrofit2.http.*
 interface ApiService {
 
     companion object {
-        var BASE_URL = "http://192.168.73.5:3000/"
+        var BASE_URL = "http://192.168.100.34:3000/"
 
         fun create() : ApiService {
 
@@ -23,7 +23,6 @@ interface ApiService {
                 .baseUrl(BASE_URL)
                 .build()
             return retrofit.create(ApiService::class.java)
-
         }
     }
 
@@ -37,7 +36,7 @@ interface ApiService {
     fun addMovie(
         @Header("Authorization") token: String,
         @Body movie: Movie
-    ): Call<Unit>
+    ): Call<Movie>
 
     @PUT("api/item/{id}")
     fun updateMovie(

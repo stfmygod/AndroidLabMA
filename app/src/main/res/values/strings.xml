@@ -22,5 +22,6 @@
     <string name="seen_at_cinema">Seen at cinema?</string>
     <string name="delete">Delete</string>
     <string name="photo_path">Photo path</string>
+    <string name="no_internet_message">No internet----------------------------------------------------------------------------------No internet----------------------------------------------------------------------------------No internet</string>
 
 </resources>
