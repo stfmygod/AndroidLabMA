@@ -13,7 +13,7 @@ import com.facebook.soloader.SoLoader
 import com.faculta.androidlabma.BuildConfig
 
 
-class Application: Application() {
+class MyApplication: Application() {
     override fun onCreate() {
         super.onCreate()
 

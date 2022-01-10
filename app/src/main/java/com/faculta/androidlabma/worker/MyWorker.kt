@@ -25,22 +25,40 @@ class MyWorker(
 
         val moviesList = db.getAllUnsyncedMovies()
         moviesList.forEach {
-            apiService.addMovie("Bearer $token", Convertor.convertFromMovieDbToMovie(it)).enqueue(object:
-                Callback<Movie> {
-                override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
-                    val newMovie = response.body()?: Movie()
-                    it.isSynced = true
-                    it._id = newMovie._id
-                    CoroutineScope(Dispatchers.IO).launch {
-                        db.updateMovie(it)
+            if (it._id == null) {
+                apiService.addMovie("Bearer $token", Convertor.convertFromMovieDbToMovie(it)).enqueue(object:
+                    Callback<Movie> {
+                    override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+                        val newMovie = response.body()?: Movie()
+                        it.isSynced = true
+                        it._id = newMovie._id
+                        CoroutineScope(Dispatchers.IO).launch {
+                            db.updateMovie(it)
+                        }
+                        Log.d("MyWorker", "Movie sync successful!")
                     }
-                    Log.d("MyWorker", "Movie sync successful!")
-                }
 
-                override fun onFailure(call: Call<Movie>, t: Throwable) {
-                    Log.d("MyWorker", "Movie sync failed: $t")
-                }
+                    override fun onFailure(call: Call<Movie>, t: Throwable) {
+                        Log.d("MyWorker", "Movie sync failed: $t")
+                    }
                 })
+            } else {
+                val id = it._id
+                apiService.updateMovie("Bearer $token", Convertor.convertFromMovieDbToMovie(it), id?: "").enqueue(object:
+                    Callback<Movie> {
+                    override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+                        it.isSynced = true
+                        CoroutineScope(Dispatchers.IO).launch {
+                            db.updateMovie(it)
+                        }
+                        Log.d("MyWorker", "Movie sync successful!")
+                    }
+
+                    override fun onFailure(call: Call<Movie>, t: Throwable) {
+                        Log.d("MyWorker", "Movie sync failed: $t")
+                    }
+                })
+            }
         }
 
         Log.d("MyWorker", "Syncing with server...")

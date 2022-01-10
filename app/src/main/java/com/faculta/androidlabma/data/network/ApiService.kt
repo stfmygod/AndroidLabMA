@@ -43,7 +43,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body movie: Movie,
         @Path("id") id: String
-    ): Call<Unit>
+    ): Call<Movie>
 
     @DELETE("api/item/{id}")
     fun deleteMovie(

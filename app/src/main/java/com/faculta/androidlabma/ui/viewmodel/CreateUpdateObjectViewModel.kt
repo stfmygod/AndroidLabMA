@@ -66,12 +66,12 @@ class CreateUpdateObjectViewModel: ViewModel() {
     fun updateObject(token: String, movie: MovieDB, id: String) {
         viewModelScope.launch {
             if (NetworkUtils.isInternetConnected) {
-                apiService.updateMovie("Bearer $token", Convertor.convertFromMovieDbToMovie(movie), id).enqueue(object : Callback<Unit> {
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                apiService.updateMovie("Bearer $token", Convertor.convertFromMovieDbToMovie(movie), id).enqueue(object : Callback<Movie> {
+                    override fun onFailure(call: Call<Movie>, t: Throwable) {
                         Log.d("CreateUpdateViewModel", t.message.toString())
                     }
 
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
                         when (response.code()) {
                             200 -> {
                                 canNavigateToNextDestination.value = true
