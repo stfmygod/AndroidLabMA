@@ -26,8 +26,6 @@ class ObjectListFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
         binding.addMovieButton.setOnClickListener {
             val directions = ObjectListFragmentDirections.actionObjectListFragmentToCreateUpdateObjectFragment()
             findNavController().navigate(directions)
